@@ -1,2 +1,10 @@
 server:
   port: 8123
+
+srping:
+  jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://srv-postgresql.am.trimblecorp.net:5432/test_paulo
+    driverClassName: org.postgresql.Driver
+    username: psousa
+    password: c1p0d@t4m1
