@@ -5,12 +5,18 @@ import com.paulo.test.repository.VeiculoRepository
 import org.springframework.stereotype.Service
 
 @Service
-class VeiculoService (
+class VeiculoService(
     private val veiculoRepository: VeiculoRepository
-        ){
+) {
 
     fun save(veiculos: List<Veiculo>) {
-        veiculos.forEach { veiculo -> veiculoRepository.save(veiculo) }
+        try {
+            veiculos.forEach { veiculo ->
+                veiculoRepository.save(veiculo)
+            }
+        } catch (e:Exception){
+            println(e.message)
+        }
     }
 
     fun load(): List<Veiculo> {

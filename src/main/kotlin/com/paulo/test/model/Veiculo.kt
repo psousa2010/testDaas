@@ -6,7 +6,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-data class Veiculo(
+class Veiculo(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Int,
