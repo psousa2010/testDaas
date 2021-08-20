@@ -22,16 +22,18 @@ class VeiculoController(
         return veiculoService.load()
     }
 
-    @DeleteMapping("deletar/{veiculoId}")
-    fun deleteVeiculo(@PathVariable("veiculoId") veiculoId: Long) {
-        return veiculoService.delete(veiculoId)
+    @DeleteMapping("deletar/{id}")
+    fun deleteVeiculo(
+        @PathVariable("id") id: Int, veiculo: Veiculo) {
+        return veiculoService.delete(id, veiculo)
     }
 
-    @PutMapping("atualizar/{veiculoId}")
+    @PutMapping("atualizar/{id}")
     fun atualizarVeiculo(
         @RequestBody veiculo: Veiculo,
-        @PathVariable("veiculoId") veiculoId: Long) {
-        return veiculoService.atualizar(veiculoId, veiculo)
+        @PathVariable("id") id: Int
+    ) {
+        return veiculoService.atualizar(id, veiculo)
     }
 
     // criar o delete e o put (verbos)

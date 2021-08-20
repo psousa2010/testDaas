@@ -3,6 +3,7 @@ package com.paulo.test.service
 import com.paulo.test.model.Veiculo
 import com.paulo.test.repository.VeiculoRepository
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class VeiculoService(
@@ -14,33 +15,36 @@ class VeiculoService(
             veiculos.forEach { veiculo ->
                 veiculoRepository.save(veiculo)
             }
-        } catch (e:Exception){
+        } catch (e: Exception) {
             println(e.message)
         }
     }
 
     fun load(): List<Veiculo> {
-        return listOf(
-            Veiculo(
-                id = 1,
-                placa = "BBB-4567",
-                ano = 1955
-            ),
-            Veiculo(
-                id = 2,
-                placa = "CCC-1564",
-                ano = 2005
-            )
-        )
-        // .find { it.placa == }
-
+        return veiculoRepository.findAll()
     }
 
-    fun delete(veiculoId: Long) {
-        return println("Veículo com identificação: $veiculoId deletado!")
+    fun delete(id: Int, veiculo: Veiculo) {
+        val veiculoEncontrado: Optional<Veiculo> = veiculoRepository.findById(id)
+
+        if (veiculoEncontrado.isPresent){
+            veiculoRepository.deleteById(id)
+            println("Veículo com identificação: ${veiculo.placa} deletado!")
+        }
+        else{
+            println("Veiculo não encontrado!")
+        }
     }
 
-    fun atualizar(veiculoId: Long, veiculo: Veiculo) {
-        return println("Veículo com identificação: $veiculoId foi atualizado!")
+    fun atualizar(id: Int, veiculo: Veiculo) {
+        val veiculoEncontrado: Optional<Veiculo> = veiculoRepository.findById(id)
+
+        if(veiculoEncontrado.isPresent){
+            veiculoRepository.save(veiculo)
+            println("Veiculo de placa ${veiculo.placa} atualizado!")
+        }
+        else{
+            println("Veiculo não encontrado!")
+        }
     }
 }
